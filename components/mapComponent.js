@@ -71,19 +71,6 @@ export default function mapComponent(props) {
                         .addTo(map)
                 })
             }}
-
-            // <Marker
-            //   key={school.id}
-            //   anchor="bottom"
-            //   coordinates={[parseFloat(school.lng), parseFloat(school.lat)] }
-            //   onClick=
-            // >
-            //      <img src='/marker.svg' />
-            // </Marker>
-
-            // new mapboxgl.Popup()
-            //     .
-        //))}
         >
 			<ZoomControl/>
 		</Map>
