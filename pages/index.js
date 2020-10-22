@@ -13,20 +13,6 @@ export default function Home() {
     returnAllResults: true,
   }
 
-  function addSchools(results) {
-    let schools;
-    for(let i = 0; i < results.length; i++){
-      console.log(results[i])
-        // if( ! Object.keys(c).find( e => e == alpha3[results[i].country])) {
-        //   c[alpha3[results[i].country]] = {}
-        // }
-        // c[alpha3[results[i].country]][label] = results[i];
-
-        // l[alpha3[results[i].country]] = results[i];
-    }
-    
-  }
-
   useEffect(() => {
     GSheetReader(options, results => {
       setSchools(results);
@@ -43,12 +29,10 @@ export default function Home() {
         setGigaChecked(!gigaChecked);
         setGigaCountries([])
     }
-    
   }
 
   return (
     <div className="main">
-
       <MapComponent 
         lon="8" 
         lat="15.5" 
@@ -57,7 +41,6 @@ export default function Home() {
       <div id="summary">
         <h2>Trouve Mon École</h2>
         <b>Nombre d'écoles:</b> {schools.length}
-
       </div>
     </div>
   )

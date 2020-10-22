@@ -16,14 +16,6 @@ export default function mapComponent(props) {
 	const [lonLat, setLonLat] = useState([props.lon, props.lat]);
 	const [lonLatMarker, setLonLatMarker] = useState([props.lon, props.lat]);
 
-	// useEffect(() => {
-	// 	setZoom(zoomDefault);
-	// 	setLonLat([props.lon, props.lat]);
-	// 	setLonLatMarker([props.lon, props.lat]);
-	// }, [props.lon, props.lat]);
-
-    console.log(props.schools)
-
 	return (
 		<Map
 			style="mapbox://styles/lacabra00/ckfqtcdnj11ty19t3stjs11dq"
@@ -35,7 +27,6 @@ export default function mapComponent(props) {
 			onMoveEnd={(map) => {
 					setZoom(map.getZoom());
 					setLonLat([map.getCenter().lng, map.getCenter().lat]);
-					console.log(map.getCenter().lng, map.getCenter().lat)
 				}
 			}
 			onStyleLoad={(map, loadEvent) => {
