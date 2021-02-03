@@ -1,6 +1,8 @@
 import React, { useRef, useState, useEffect } from 'react';
 import ReactMapboxGl, { Layer, Feature, Marker, Popup, ZoomControl } from 'react-mapbox-gl';
 import mapboxgl from 'mapbox-gl';
+import { renderToString } from 'react-dom/server'
+
 
 const zoomDefault = 6;
 
@@ -32,17 +34,22 @@ export default function mapComponent(props) {
 			onStyleLoad={(map, loadEvent) => {
                 props.schools.map(school => {
                     console.log(school)
-                    let html=`<table>
+                    let htmlTable=`<div><table>
                         <tr>
                             <td><b>Date:</b></td>
-                            <td>${school.timestamp}
+                            <td>${school.timestamp}</td>
+                        </tr>
                         <tr>
                             <td><b>Code d'école:</b></td>
                             <td>${school.code}</td>
                         </tr>
                         <tr>
                             <td><b>Coordonnées:&nbsp;&nbsp;</b></td>
-                            <td>[${school.lat},${school.lng}]</td>
+                            <td><a href="https://www.google.com/maps/place/${school.lat}+${school.lng}/@${school.lat},${school.lng},456m/data=!3m1!1e3" target="_blank">
+                                    [${school.lat},${school.lng}]
+                                </a>
+                            </td>
+                        </tr>
                         <tr>
                             <td><b>Électricité:</b></td>
                             <td>${school.electricity=='Yes'?'Oui':'Non'}</td>
@@ -51,8 +58,13 @@ export default function mapComponent(props) {
                             <td><b>Internet:</b></td>
                             <td>${school.internet=='Yes'?'Oui':'Non'}</td>
                         </tr>
-                    </table>`
-                    var popup = new mapboxgl.Popup({ offset: 25 }).setHTML(html);
+                        <tr>
+                            <td colspan="2">
+                            <img alt='static Mapbox map of this location' src='https://api.mapbox.com/styles/v1/mapbox/satellite-v9/static/${school.lng},${school.lat},16,0.00,0.00/200x200@2x?access_token=${process.env.NEXT_PUBLIC_ACCESS_TOKEN}' >
+                    </table></div>`
+                    var table = document.createElement('table')
+                    table.innerHTML = htmlTable;
+                    var popup = new mapboxgl.Popup({ offset: 25, maxWidth: 'none' }).setDOMContent(table);
 
                     var el = document.createElement('div');
                     el.id = 'marker';
