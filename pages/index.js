@@ -8,6 +8,7 @@ export default function Home() {
   const [schools, setSchools] = useState([]);
 
   const options = {
+    apiKey: process.env.NEXT_PUBLIC_APIKEY,
     sheetId: process.env.NEXT_PUBLIC_SHEET,
     sheetNumber: 1,
     returnAllResults: true,
