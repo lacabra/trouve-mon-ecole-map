@@ -33,7 +33,6 @@ export default function mapComponent(props) {
 			}
 			onStyleLoad={(map, loadEvent) => {
                 props.schools.map(school => {
-                    console.log(school)
                     let htmlTable=`<div><table>
                         <tr>
                             <td><b>Date:</b></td>
